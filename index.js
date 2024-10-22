@@ -14,8 +14,8 @@ app.use(requestLogger);
 
 app.set("view engine", "ejs");
 
-// static files to serve images
-app.use(express.static('public'));
+// static files
+app.use(express.static('styles'));
 app.use('/images', express.static('images'));
 
 app.get("/", (req, res) => {
