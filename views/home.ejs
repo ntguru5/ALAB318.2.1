@@ -3,17 +3,100 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/style.css">
         <title>Home Page</title>
+        <style>
+            body {
+    font-family: Arial, sans-serif;
+    background-color: aquamarine;
+}
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #337ab7;
+    margin-right: 20px;
+}
+.nav a:hover {
+    color: #23527c;
+}
+.content {
+    text-align: center;
+}
+.content img {
+    width: 50%;
+    height: auto;
+    margin: 20px auto;
+}
+.download-button {
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.download-button:hover {
+    background-color: #23527c;
+}
+.download-button {
+    display: block;
+    margin: 20px auto;
+}
+
+        </style>
     </head>
     <body>
-        <h1>You are on the Home Page</h1>
-        <nav>
-            <a href="about">About</a>
-        </nav>
-        <form action="/submit-form" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <button type="submit">Submit</button>
-        </form>
+        <div class="container">
+            <div class="header">
+                <h1>You are on the Home Page</h1>
+            </div>
+            <div class="nav">
+                <a href="about">About</a>
+            </div>
+            <div class="content">
+                <img src="../images/alab.jpg" alt="ALab Image">
+                <button class="download-button" id="download-button">Download Image</button>
+                <form action="/submit-form" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('download-button').addEventListener('click', () => {
+                fetch('/download-img')
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'alab.jpg';
+                    a.click();
+                });
+            });
+        </script>
     </body>
 </html>

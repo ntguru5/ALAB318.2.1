@@ -14,6 +14,10 @@ app.use(requestLogger);
 
 app.set("view engine", "ejs");
 
+// static files to serve images
+app.use(express.static('public'));
+app.use('/images', express.static('images'));
+
 app.get("/", (req, res) => {
     res.render("home");
 });
@@ -24,6 +28,12 @@ app.get("/about", (req, res) => {
 
 app.post("/submit-form", (req, res) => {
     res.send("Form submitted successfully");
+});
+
+// download image
+app.get('/download-img', (req, res) => {
+    const filePath = 'images/alab.jpg';
+    res.download(filePath, 'alab.jpg');
 });
 
 app.listen(port, () => {
