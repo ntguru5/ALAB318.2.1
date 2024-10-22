@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
 const port = 3000;
+
+const requestLogger = (req, res, next) => {
+    console.log(`Request method: ${req.method}`);
+    console.log(`Request URL: ${req.url}`);
+    next();
+};
+
+app.use(morgan("dev"));
+app.use(requestLogger);
 
 app.set("view engine", "ejs");
 
